@@ -279,6 +279,24 @@ const applyPreset = (presetName: keyof typeof presets): void => {
   min-width: 300px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.control-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .panel-title {
@@ -287,10 +305,33 @@ const applyPreset = (presetName: keyof typeof presets): void => {
   font-size: 1.4em;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.panel-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #3498db, transparent);
+  border-radius: 2px;
 }
 
 .control-group {
   margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.control-group:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
 }
 
 .control-label {
@@ -298,39 +339,53 @@ const applyPreset = (presetName: keyof typeof presets): void => {
   margin-bottom: 8px;
   font-weight: 600;
   font-size: 0.95em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .control-slider {
   width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.3);
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
   outline: none;
   margin-bottom: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+}
+
+.control-slider:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scaleY(1.2);
 }
 
 .control-slider::-webkit-slider-thumb {
   appearance: none;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: #fff;
+  background: linear-gradient(135deg, #fff, #e3f2fd);
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  border: 2px solid rgba(52, 152, 219, 0.5);
 }
 
 .control-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
+  transform: scale(1.3);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: #3498db;
+}
+
+.control-slider::-webkit-slider-thumb:active {
+  transform: scale(1.1);
 }
 
 .control-info {
   font-size: 0.8em;
   opacity: 0.8;
   font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .control-actions {
@@ -342,17 +397,34 @@ const applyPreset = (presetName: keyof typeof presets): void => {
 .reset-button {
   flex: 1;
   padding: 12px;
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   color: white;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.reset-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.reset-button:hover::before {
+  left: 100%;
 }
 
 .reset-button:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.2));
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
@@ -361,12 +433,19 @@ const applyPreset = (presetName: keyof typeof presets): void => {
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   padding-top: 20px;
   margin-top: 20px;
+  animation: fadeIn 0.6s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .preset-title {
   margin-bottom: 15px;
   font-size: 1.1em;
   font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .preset-buttons {
@@ -377,17 +456,38 @@ const applyPreset = (presetName: keyof typeof presets): void => {
 
 .preset-button {
   padding: 10px;
-  background: rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 6px;
   color: white;
   font-size: 0.9em;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.preset-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.preset-button:hover::before {
+  width: 200px;
+  height: 200px;
 }
 
 .preset-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1));
   transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 </style>
