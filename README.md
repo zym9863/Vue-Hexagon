@@ -1,5 +1,134 @@
-# Vue 3 + TypeScript + Vite
+# 六边形物理模拟游戏
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+一个基于Vue.js 3、TypeScript和Matter.js构建的实时物理模拟游戏，展示了重力、摩擦力、碰撞检测和六边形容器旋转的真实物理效果。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 🎮 游戏特性
+
+### 核心功能
+- **六边形容器**：可连续旋转的六边形物理容器
+- **物理小球**：受重力、摩擦力影响的真实物理小球
+- **碰撞检测**：精确的墙壁碰撞检测和反弹效果
+- **实时渲染**：流畅的60fps Canvas渲染
+
+### 物理模拟
+- **重力系统**：可调节的重力加速度（0-2 m/s²）
+- **摩擦力**：表面摩擦系数控制（0-1）
+- **弹性碰撞**：可调节的弹性系数（0-1）
+- **旋转动力学**：六边形容器旋转速度控制
+
+### 用户界面
+- **实时控制面板**：动态调节所有物理参数
+- **物理状态监控**：实时显示位置、速度、动能等信息
+- **性能监控**：FPS和帧时间显示
+- **速度历史图表**：可视化速度变化趋势
+- **预设配置**：多种预设物理场景
+
+## 🚀 快速开始
+
+### 环境要求
+- Node.js 16+
+- pnpm 8+
+
+### 安装依赖
+```bash
+pnpm install
+```
+
+### 启动开发服务器
+```bash
+pnpm dev
+```
+
+### 构建生产版本
+```bash
+pnpm build
+```
+
+### 预览生产版本
+```bash
+pnpm preview
+```
+
+## 🎯 使用说明
+
+### 控制面板功能
+
+1. **重力加速度**：控制小球下落的速度
+2. **摩擦系数**：影响小球与墙壁接触时的摩擦力
+3. **弹性系数**：决定碰撞时的反弹强度
+4. **旋转速度**：控制六边形容器的旋转速度（支持正反向）
+5. **小球半径**：调整小球的大小
+6. **容器大小**：改变六边形容器的尺寸
+
+### 预设配置
+
+- **标准模式**：平衡的物理参数，适合一般体验
+- **低重力**：模拟月球重力环境
+- **超级弹性**：高弹性碰撞效果
+- **快速旋转**：高速旋转的六边形容器
+
+### 物理状态监控
+
+- **位置信息**：实时显示小球的X、Y坐标
+- **速度向量**：显示X、Y方向的速度分量
+- **速度大小**：总速度的标量值
+- **动能**：当前的动能数值
+- **容器角度**：六边形的旋转角度
+- **运动状态**：根据速度判断的运动状态
+
+## 🏗️ 项目结构
+
+```
+src/
+├── components/           # Vue组件
+│   ├── HexagonGame.vue  # 主游戏组件
+│   ├── ControlPanel.vue # 控制面板组件
+│   └── PhysicsStatus.vue# 物理状态显示组件
+├── utils/               # 工具类
+│   └── PhysicsEngine.ts # 物理引擎封装
+├── App.vue             # 主应用组件
+├── main.ts             # 应用入口
+└── style.css           # 全局样式
+```
+
+## 🔧 技术栈
+
+- **前端框架**：Vue.js 3.5+ with Composition API
+- **开发语言**：TypeScript 5.8+
+- **构建工具**：Vite 7.1+
+- **物理引擎**：Matter.js 0.20+
+- **包管理器**：pnpm 10+
+- **图形渲染**：HTML5 Canvas API
+
+## 🎨 设计特色
+
+### 视觉效果
+- 渐变背景和玻璃态效果
+- 实时阴影和高光渲染
+- 流畅的动画过渡
+- 响应式设计支持
+
+### 性能优化
+- 60fps稳定帧率
+- GPU加速渲染
+- 内存管理优化
+- 事件节流处理
+
+## 🔬 物理原理
+
+### 碰撞检测
+游戏使用Matter.js的精确碰撞检测算法，确保小球与六边形墙壁的碰撞计算准确无误。
+
+### 旋转动力学
+六边形容器的旋转会影响碰撞时的反弹角度和速度，模拟真实的旋转容器物理效果。
+
+### 能量守恒
+系统考虑了摩擦力和非完全弹性碰撞导致的能量损失，符合物理定律。
+
+## 🤝 贡献指南
+
+欢迎提交Issue和Pull Request来改进这个项目！
+
+## 📄 许可证
+
+MIT License - 详见 [LICENSE](LICENSE) 文件
