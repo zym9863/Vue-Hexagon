@@ -89,6 +89,34 @@ const resetGame = (): void => {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.app::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.05) 50%, transparent 100%);
+  pointer-events: none;
+  animation: backgroundShift 20s ease-in-out infinite;
+}
+
+@keyframes backgroundShift {
+  0%, 100% { 
+    background-position: 0% 50%, 100% 50%, 0% 0%;
+    opacity: 1;
+  }
+  50% { 
+    background-position: 100% 50%, 0% 50%, 100% 100%;
+    opacity: 0.8;
+  }
 }
 
 .app-header {
@@ -96,6 +124,19 @@ const resetGame = (): void => {
   padding: 30px 20px;
   background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .app-title {
@@ -103,10 +144,36 @@ const resetGame = (): void => {
   margin-bottom: 15px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, #fff, #e3f2fd);
+  background: linear-gradient(45deg, #fff, #e3f2fd, #3498db);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.app-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #3498db, transparent);
+  border-radius: 2px;
+  animation: titleUnderline 2s ease-in-out infinite;
+}
+
+@keyframes titleUnderline {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
 }
 
 .app-description {
@@ -115,6 +182,12 @@ const resetGame = (): void => {
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.6;
+  animation: fadeIn 0.8s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .app-main {
@@ -124,10 +197,34 @@ const resetGame = (): void => {
   gap: 30px;
   padding: 30px 20px;
   flex-wrap: wrap;
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .game-container {
   flex-shrink: 0;
+  animation: scaleIn 0.6s ease-out 0.4s both;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .control-container {
@@ -144,6 +241,8 @@ const resetGame = (): void => {
   backdrop-filter: blur(10px);
   font-size: 0.9em;
   opacity: 0.8;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.8s ease-out 0.8s both;
 }
 
 /* 响应式设计 */
@@ -179,6 +278,10 @@ const resetGame = (): void => {
   .app-main {
     padding: 20px 10px;
     gap: 20px;
+  }
+
+  .app-header {
+    padding: 20px 15px;
   }
 }
 </style>
